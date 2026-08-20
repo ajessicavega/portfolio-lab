@@ -1,0 +1,24 @@
+{
+  "name": "portfolio-lab",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "optimize-project": "node scripts/optimize-projects.mjs",
+    "optimize-projects": "node scripts/optimize-projects.mjs",
+    "optimize-section-2": "node scripts/optimize-section-2-creatives.mjs"
+  },
+  "dependencies": {
+    "gsap": "^3.13.0",
+    "lenis": "^1.3.26"
+  },
+  "devDependencies": {
+    "ffmpeg-static": "^5.3.0",
+    "ffprobe-static": "^3.1.0",
+    "sharp": "^0.35.3",
+    "vite": "^7.1.0"
+  }
+}
