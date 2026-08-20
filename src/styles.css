@@ -9,7 +9,7 @@
   --row-step: clamp(9rem, 20vh, 15rem);
   --gallery-start-offset: 3vh;
   --gallery-gutter: clamp(0.75rem, 1.2vw, 1.25rem);
-  --project-title-size: 0.75rem;
+  --project-title-size: 0.375rem;
   --project-meta-size: 0.75rem;
   --showcase-dark: #000;
   --showcase-light: #fff;
@@ -238,6 +238,8 @@ a { text-decoration: none; }
   display: block;
   transform: scale(var(--row-inverse-scale));
   font-size: var(--project-title-size);
+  font-weight: 700;
+  letter-spacing: 0.5px;
   transform-origin: left top;
 }
 
