@@ -43,7 +43,6 @@ function createCard(project, isFocus) {
     </span>
     <span class="card-meta">
       <span class="card-title">${project.title}</span>
-      <span class="card-year">${project.year}</span>
     </span>
   `;
 

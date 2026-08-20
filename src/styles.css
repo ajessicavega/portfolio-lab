@@ -234,20 +234,11 @@ a { text-decoration: none; }
   text-transform: uppercase;
 }
 
-.card-title,
-.card-year {
+.card-title {
   display: block;
   transform: scale(var(--row-inverse-scale));
-}
-
-.card-title {
   font-size: var(--project-title-size);
   transform-origin: left top;
-}
-
-.card-year {
-  font-size: var(--project-meta-size);
-  transform-origin: right top;
 }
 
 .dark-showcase {

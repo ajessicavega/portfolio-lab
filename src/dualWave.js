@@ -77,12 +77,20 @@ export const creativeLabels = Object.freeze({
 });
 
 const inactiveCharacters = ["0", "1"];
-const createInactiveLabel = (index, offset) => Array.from(
-  { length: 6 + ((index * 5 + offset) % 7) },
-  (_, characterIndex) => inactiveCharacters[
-    (index * 11 + characterIndex * 7 + offset * 3) % inactiveCharacters.length
-  ]
-).join("");
+const createInactiveLabel = (index, offset) => {
+  let state = (
+    Math.imul(index + 1, 0x9E3779B1)
+    ^ Math.imul(offset, 0x85EBCA6B)
+  ) >>> 0;
+  const length = 8 + ((index * 5 + offset * 3) % 7);
+
+  return Array.from({ length }, () => {
+    state ^= state << 13;
+    state ^= state >>> 17;
+    state ^= state << 5;
+    return inactiveCharacters[(state >>> 0) & 1];
+  }).join("");
+};
 
 export const inactiveWaveLabels = Object.freeze(
   Array.from({ length: 48 }, (_, index) => ({

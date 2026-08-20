@@ -3,7 +3,7 @@ import { renderGooeyMarquee } from "./gooeyMarquee";
 
 export const closingWords = [
   "CRIATIVOS",
-  "IDENTIDADES",
+  "DIREÇÕES VISUAIS",
   "CAMPANHAS",
   "PÁGINAS DE VENDAS",
   "SITES"
