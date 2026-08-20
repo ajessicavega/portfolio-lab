@@ -10,9 +10,10 @@ const SOURCE_DIR = path.join(PROJECT_ROOT, "source-media", "criativos-secao-2");
 const OUTPUT_DIR = path.join(PROJECT_ROOT, "public", "section-2-creatives");
 const OUTPUT_ROOT = path.dirname(OUTPUT_DIR);
 const EXPECTED_COUNT = 40;
+const OUTPUT_WIDTH = 720;
 const IMAGE_EXTENSIONS = new Set([".png", ".jpg", ".jpeg"]);
 const WEBP_OPTIONS = {
-  quality: 88,
+  quality: 82,
   alphaQuality: 100,
   effort: 6,
   smartSubsample: true,
@@ -83,14 +84,19 @@ async function optimizeImage(inputPath, outputPath) {
     sharp(inputPath).stats(),
   ]);
 
-  await sharp(inputPath).webp(WEBP_OPTIONS).toFile(outputPath);
+  await sharp(inputPath)
+    .resize({ width: OUTPUT_WIDTH, withoutEnlargement: true })
+    .webp(WEBP_OPTIONS)
+    .toFile(outputPath);
 
   const outputMetadata = await sharp(outputPath).metadata();
+  const expectedWidth = Math.min(inputMetadata.width, OUTPUT_WIDTH);
+  const expectedHeight = Math.round(inputMetadata.height * (expectedWidth / inputMetadata.width));
   if (outputMetadata.format !== "webp") {
     throw new Error(`Output inválido: ${path.basename(outputPath)}`);
   }
-  if (inputMetadata.width !== outputMetadata.width || inputMetadata.height !== outputMetadata.height) {
-    throw new Error(`Dimensões alteradas em ${path.basename(inputPath)}`);
+  if (outputMetadata.width !== expectedWidth || outputMetadata.height !== expectedHeight) {
+    throw new Error(`Dimensões inesperadas em ${path.basename(inputPath)}`);
   }
   if (!inputStats.isOpaque && !outputMetadata.hasAlpha) {
     throw new Error(`Transparência perdida em ${path.basename(inputPath)}`);
@@ -126,6 +132,7 @@ async function main() {
   console.log(`SOURCE: ${path.relative(PROJECT_ROOT, SOURCE_DIR)}`);
   console.log(`OUTPUT: ${path.relative(PROJECT_ROOT, OUTPUT_DIR)}`);
   console.log(`Imagens: ${images.length}; sequência: 01–${EXPECTED_COUNT}`);
+  console.log(`Resize: largura máxima=${OUTPUT_WIDTH}px`);
   console.log(`WebP: quality=${WEBP_OPTIONS.quality}, alphaQuality=${WEBP_OPTIONS.alphaQuality}, effort=${WEBP_OPTIONS.effort}, smartSubsample=${WEBP_OPTIONS.smartSubsample}`);
 
   try {
