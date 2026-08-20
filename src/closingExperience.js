@@ -47,7 +47,7 @@ export const renderClosingExperience = () => `
         <div class="closing-experience__cta" inert>
           <h2 id="closing-cta-title">Queremos ouvir<br>as suas ideias.</h2>
           <p>Entre em contato para falar sobre seu projeto.</p>
-          <a href="mailto:hello@studionorte.com">Entrar em contato ↗</a>
+          <a href="https://wa.me/5516997629003">Entrar em contato ↗</a>
         </div>
       </div>
     </div>
@@ -59,8 +59,7 @@ export const renderSiteFooter = () => `
     <div class="site-footer__meta">
       <p>MEZURASH STUDIOS</p>
       <div class="site-footer__links" aria-label="Redes sociais">
-        <a href="https://www.instagram.com/" target="_blank" rel="noreferrer">INSTAGRAM</a>
-        <a href="https://www.behance.net/" target="_blank" rel="noreferrer">BEHANCE</a>
+        <a href="https://instagram.com/merencianno" target="_blank" rel="noreferrer">INSTAGRAM</a>
       </div>
       <p>© 2026</p>
     </div>

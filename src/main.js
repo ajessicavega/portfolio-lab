@@ -20,7 +20,7 @@ app.innerHTML = `
   <header class="site-header">
     <a class="brand" href="#top" aria-label="Mezurash Studios, início">MEZURASH STUDIOS.©</a>
     <p>OPERAÇÕES DE PRODUTOS DIGITAIS<br>E CAMPANHAS DE VENDAS.</p>
-    <a class="contact-link" href="mailto:hello@studionorte.com">ENTRE EM CONTATO ↗</a>
+    <a class="contact-link" href="https://wa.me/5516997629003">ENTRE EM CONTATO ↗</a>
   </header>
 
   <main id="top">
