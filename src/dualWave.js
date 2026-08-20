@@ -245,6 +245,8 @@ export class DualWaveAnimation {
 
     if (!this.leftTexts.length || !this.rightTexts.length) return this;
 
+    this.preloadCreatives();
+
     this.scrambleLabels = new Map(
       [...this.leftVisuals, ...this.rightVisuals].map((text) => [text, text.textContent])
     );
@@ -436,6 +438,34 @@ export class DualWaveAnimation {
   updateFocus(focusedIndex) {
     this.leftTexts.forEach((text, index) => text.classList.toggle("is-focused", index === focusedIndex));
     this.rightTexts.forEach((text, index) => text.classList.toggle("is-focused", index === focusedIndex));
+  }
+
+  preloadCreatives() {
+    const sources = [...new Set(
+      this.leftTexts.map((text) => text.dataset.image).filter(Boolean)
+    )];
+
+    this.wrapper.dataset.creativesReady = "false";
+    this.creativePreloadPromise = Promise.allSettled(
+      sources.map((src) => new Promise((resolve) => {
+        const image = new Image();
+        const settle = () => resolve(src);
+
+        image.onload = () => {
+          if (typeof image.decode !== "function") {
+            settle();
+            return;
+          }
+
+          image.decode().catch(() => {}).finally(settle);
+        };
+        image.onerror = settle;
+        image.src = src;
+      }))
+    ).then((results) => {
+      this.wrapper.dataset.creativesReady = "true";
+      return results;
+    });
   }
 
   updateThumbnail(focusedText, updatePosition = true) {
